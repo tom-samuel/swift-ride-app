@@ -1,4 +1,3 @@
-// SwiftRide Premium JavaScript
 class SwiftRideApp {
     constructor() {
         this.init();
@@ -23,21 +22,18 @@ class SwiftRideApp {
     }
 
     setupAnimations() {
-        // Add hover effects to interactive elements
-        const interactiveElements = document.querySelectorAll('.btn-primary, .btn-secondary, .service-card');
+        const interactiveElements = document.querySelectorAll('.btn-primary, .btn-secondary, .ride-option');
         interactiveElements.forEach(el => {
             el.classList.add('hover-lift');
         });
 
-        // Add ripple effects to buttons
-        const buttons = document.querySelectorAll('.btn-primary, .btn-hero-primary');
+        const buttons = document.querySelectorAll('.btn-primary, .btn-hero-primary, .book-ride-btn');
         buttons.forEach(button => {
             button.classList.add('ripple');
         });
     }
 
     setupEventListeners() {
-        // Download button handlers
         const downloadButtons = document.querySelectorAll('.store-btn, .btn-hero-primary');
         downloadButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -46,7 +42,6 @@ class SwiftRideApp {
             });
         });
 
-        // Demo video handler
         const demoBtn = document.querySelector('.btn-hero-secondary');
         if (demoBtn) {
             demoBtn.addEventListener('click', (e) => {
@@ -54,10 +49,27 @@ class SwiftRideApp {
                 this.playDemoVideo();
             });
         }
+
+        const rideOptions = document.querySelectorAll('.ride-option');
+        rideOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                rideOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                const rideType = option.querySelector('strong').textContent;
+                this.showNotification(`Selected ${rideType} ride`, 'success');
+            });
+        });
+
+        const bookBtn = document.querySelector('.book-ride-btn');
+        if (bookBtn) {
+            bookBtn.addEventListener('click', () => {
+                this.bookRide();
+            });
+        }
     }
 
     showDownloadModal() {
-        // Simple notification for demo
         this.showNotification('📱 Download starting soon...', 'success');
     }
 
@@ -65,15 +77,21 @@ class SwiftRideApp {
         this.showNotification('🎬 Demo video would play here', 'info');
     }
 
+    bookRide() {
+        const activeRide = document.querySelector('.ride-option.active');
+        const rideType = activeRide ? activeRide.querySelector('strong').textContent : 'Swift';
+        
+        this.showNotification(`🚗 Booking ${rideType} ride...`, 'success');
+        
+        setTimeout(() => {
+            this.showNotification(`✅ ${rideType} ride booked! Driver arriving in 2 minutes.`, 'success');
+        }, 1500);
+    }
+
     showNotification(message, type = 'info') {
-        // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification notification-${type} bounce-in`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <span>${message}</span>
-            </div>
-        `;
+        notification.innerHTML = `<div class="notification-content">${message}</div>`;
         
         notification.style.cssText = `
             position: fixed;
@@ -91,7 +109,6 @@ class SwiftRideApp {
 
         document.body.appendChild(notification);
 
-        // Remove after 3 seconds
         setTimeout(() => {
             notification.style.animation = 'fadeInUp 0.3s ease reverse';
             setTimeout(() => notification.remove(), 300);
@@ -99,12 +116,10 @@ class SwiftRideApp {
     }
 }
 
-// Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new SwiftRideApp();
 });
 
-// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
