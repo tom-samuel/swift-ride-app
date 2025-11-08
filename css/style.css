@@ -1,6 +1,4 @@
-/* ===== SWIFTRIDE PREMIUM DESIGN SYSTEM ===== */
 :root {
-  /* Premium Color Palette */
   --primary: #0066FF;
   --primary-dark: #0052CC;
   --primary-light: #3385FF;
@@ -9,8 +7,6 @@
   --success: #00C851;
   --warning: #FFBB33;
   --error: #FF4444;
-  
-  /* Sophisticated Neutrals */
   --white: #FFFFFF;
   --gray-50: #F8FAFC;
   --gray-100: #F1F5F9;
@@ -23,26 +19,18 @@
   --gray-800: #1E293B;
   --gray-900: #0F172A;
   --black: #000000;
-  
-  /* Glass Morphism */
   --glass-bg: rgba(255, 255, 255, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  
-  /* Premium Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  
-  /* Smooth Transitions */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* ===== BASE STYLES ===== */
 * {
   margin: 0;
   padding: 0;
@@ -54,14 +42,13 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
   color: var(--gray-800);
   background: var(--white);
   overflow-x: hidden;
 }
 
-/* ===== PREMIUM NAVIGATION ===== */
 .navbar {
   position: fixed;
   top: 0;
@@ -155,7 +142,6 @@ body {
   cursor: pointer;
 }
 
-/* ===== PREMIUM BUTTONS ===== */
 .btn-primary, .btn-secondary, .btn-hero-primary, .btn-hero-secondary {
   padding: 12px 24px;
   border: none;
@@ -218,7 +204,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* ===== HERO SECTION - PREMIUM DESIGN ===== */
 .hero-section {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -249,31 +234,40 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+  text-align: center;
   animation: float 6s ease-in-out infinite;
 }
 
 .card-1 {
-  width: 200px;
-  height: 120px;
+  width: 140px;
   top: 20%;
   left: 10%;
   animation-delay: 0s;
 }
 
 .card-2 {
-  width: 150px;
-  height: 90px;
+  width: 140px;
   top: 60%;
   right: 15%;
   animation-delay: 2s;
 }
 
 .card-3 {
-  width: 180px;
-  height: 100px;
+  width: 140px;
   bottom: 20%;
   left: 20%;
   animation-delay: 4s;
+}
+
+.floating-card i {
+  font-size: 2rem;
+  color: var(--secondary);
 }
 
 .hero-container {
@@ -334,32 +328,31 @@ body {
   flex-wrap: wrap;
 }
 
-.hero-stats {
+.hero-features {
   display: flex;
   gap: 2rem;
 }
 
-.stat {
-  text-align: center;
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
 }
 
-.stat-number {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--white);
-  margin-bottom: 0.5rem;
+.feature i {
+  color: var(--secondary);
 }
 
-.stat-label {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-}
-
-/* ===== PHONE MOCKUP - PREMIUM DESIGN ===== */
 .hero-visual {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.app-showcase {
+  position: relative;
 }
 
 .phone-mockup {
@@ -387,56 +380,109 @@ body {
   position: relative;
 }
 
-.app-screen {
-  width: 100%;
-  height: 100%;
+.app-interface {
   padding: 20px;
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.app-header {
-  margin-bottom: 20px;
-}
-
-.location-pill {
+.location-input {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
-  color: var(--white);
-  padding: 12px 20px;
-  border-radius: 25px;
-  display: inline-flex;
+  border-radius: 15px;
+  padding: 15px;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.map-preview {
+.location-input input {
+  background: transparent;
+  border: none;
+  color: var(--white);
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.location-input input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.location-input input:focus {
+  outline: none;
+}
+
+.live-map {
   flex: 1;
-  background: linear-gradient(135deg, var(--gray-700), var(--gray-600));
+  background: linear-gradient(135deg, #2D3748, #4A5568);
   border-radius: 15px;
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
 }
 
-.ride-options {
+.map-points {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.user-location, .driver-location {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: var(--primary);
+  border-radius: 50%;
   display: flex;
-  gap: 8px;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.user-location {
+  top: 30%;
+  left: 20%;
+  background: var(--success);
+}
+
+.driver-location {
+  top: 60%;
+  left: 60%;
+  background: var(--accent);
+  animation: drive 3s ease-in-out infinite;
+}
+
+.route-line {
+  position: absolute;
+  top: 35%;
+  left: 25%;
+  width: 40%;
+  height: 2px;
+  background: var(--primary);
+  transform: rotate(30deg);
+}
+
+.ride-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .ride-option {
-  flex: 1;
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--glass-border);
-  color: var(--white);
-  padding: 15px 10px;
   border-radius: 12px;
-  text-align: center;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   cursor: pointer;
   transition: var(--transition);
 }
@@ -447,10 +493,64 @@ body {
 }
 
 .ride-option:hover {
-  transform: translateY(-2px);
+  transform: translateX(5px);
 }
 
-/* ===== SCROLL INDICATOR ===== */
+.ride-info {
+  flex: 1;
+}
+
+.ride-info strong {
+  color: var(--white);
+  display: block;
+  font-size: 0.9rem;
+}
+
+.ride-info span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+}
+
+.book-ride-btn {
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  color: var(--white);
+  border: none;
+  border-radius: 15px;
+  padding: 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.book-ride-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.floating-car {
+  position: absolute;
+  font-size: 2rem;
+  color: var(--primary);
+  animation: floatCar 4s ease-in-out infinite;
+}
+
+.car-1 {
+  top: 20%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.car-2 {
+  bottom: 30%;
+  left: 5%;
+  animation-delay: 2s;
+}
+
 .scroll-indicator {
   position: absolute;
   bottom: 30px;
@@ -480,7 +580,6 @@ body {
   animation: scroll 2s infinite;
 }
 
-/* ===== DOWNLOAD CTA ===== */
 .download-cta {
   background: linear-gradient(135deg, var(--gray-900), var(--gray-800));
   color: var(--white);
@@ -557,7 +656,6 @@ body {
   font-size: 1.1rem;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1024px) {
   .hero-container {
     grid-template-columns: 1fr;
@@ -588,11 +686,7 @@ body {
     font-size: 2.5rem;
   }
   
-  .hero-actions {
-    justify-content: center;
-  }
-  
-  .hero-stats {
+  .hero-actions, .hero-features {
     justify-content: center;
   }
   
@@ -604,6 +698,10 @@ body {
   .store-btn {
     width: 100%;
     max-width: 250px;
+  }
+  
+  .floating-card {
+    display: none;
   }
 }
 
@@ -617,7 +715,12 @@ body {
   }
   
   .phone-mockup {
-    width: 250px;
-    height: 500px;
+    width: 280px;
+    height: 560px;
+  }
+  
+  .hero-features {
+    flex-direction: column;
+    gap: 1rem;
   }
 }
