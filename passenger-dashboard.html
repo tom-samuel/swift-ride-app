@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Dashboard - SwiftRide</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <span class="logo-text">SwiftRide</span>
+            </a>
+            
+            <div class="nav-content">
+                <div class="nav-links">
+                    <a href="passenger-dashboard.html" class="nav-link active">Dashboard</a>
+                    <a href="ride-history.html" class="nav-link">Ride History</a>
+                    <a href="payment-methods.html" class="nav-link">Payment</a>
+                    <a href="profile.html" class="nav-link">Profile</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <span class="user-welcome">Welcome, Passenger!</span>
+                    <a href="index.html" class="btn-secondary">Logout</a>
+                </div>
+            </div>
+
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="dashboard-main">
+            <!-- Map Section -->
+            <section class="map-section">
+                <div class="map-container">
+                    <div id="rideMap"></div>
+                    <div class="map-controls">
+                        <button class="location-btn" onclick="swiftRideMap.centerOnUser()" title="Center on my location">
+                            <i class="fas fa-location-arrow"></i>
+                        </button>
+                        <button class="location-btn" onclick="swiftRideMap.clearRoute()" title="Clear route">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-grid">
+                    <button class="action-btn" onclick="swiftRideMap.showNotification('📍 Setting current location as pickup...', 'info')">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Set Pickup Here
+                    </button>
+                    <button class="action-btn" onclick="swiftRideMap.showNotification('🎯 Ready to set destination - click on map!', 'info')">
+                        <i class="fas fa-flag-checkered"></i>
+                        Set Destination
+                    </button>
+                    <button class="action-btn" onclick="swiftRideMap.showNotification('🚗 Finding nearest drivers...', 'info')">
+                        <i class="fas fa-car"></i>
+                        Find Drivers
+                    </button>
+                    <button class="action-btn" onclick="swiftRideMap.showNotification('💰 Calculating fare estimate...', 'info')">
+                        <i class="fas fa-dollar-sign"></i>
+                        Estimate Fare
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-sidebar">
+            <!-- Ride Booking Card -->
+            <div class="booking-card">
+                <h3>Book Your Ride</h3>
+                <div class="location-inputs">
+                    <div class="input-group">
+                        <label>Pickup Location</label>
+                        <input type="text" id="pickupInput" placeholder="Current location or enter address">
+                    </div>
+                    <div class="input-group">
+                        <label>Destination</label>
+                        <input type="text" id="destinationInput" placeholder="Where to?">
+                    </div>
+                </div>
+
+                <!-- Ride Options -->
+                <div class="ride-options">
+                    <h4>Choose Ride Type</h4>
+                    <div class="ride-option active" data-type="swift" data-price="12.50">
+                        <i class="fas fa-car"></i>
+                        <div class="ride-info">
+                            <strong>Swift</strong>
+                            <span>2 min • $12.50</span>
+                        </div>
+                    </div>
+                    <div class="ride-option" data-type="comfort" data-price="18.75">
+                        <i class="fas fa-car-side"></i>
+                        <div class="ride-info">
+                            <strong>Comfort</strong>
+                            <span>3 min • $18.75</span>
+                        </div>
+                    </div>
+                    <div class="ride-option" data-type="premium" data-price="24.99">
+                        <i class="fas fa-star"></i>
+                        <div class="ride-info">
+                            <strong>Premium</strong>
+                            <span>5 min • $24.99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="book-ride-btn" onclick="handleBookRide()">
+                    <i class="fas fa-bolt"></i>
+                    Book Swift Ride
+                </button>
+            </div>
+
+            <!-- Nearby Drivers -->
+            <div class="drivers-card">
+                <h3>Nearby Drivers</h3>
+                <div class="drivers-list">
+                    <div class="driver-item">
+                        <div class="driver-avatar">D1</div>
+                        <div class="driver-details">
+                            <div class="driver-name">Driver 1</div>
+                            <div class="driver-rating">⭐ 4.8</div>
+                            <div class="driver-distance">0.8 km away</div>
+                        </div>
+                    </div>
+                    <div class="driver-item">
+                        <div class="driver-avatar">D2</div>
+                        <div class="driver-details">
+                            <div class="driver-name">Driver 2</div>
+                            <div class="driver-rating">⭐ 4.9</div>
+                            <div class="driver-distance">1.2 km away</div>
+                        </div>
+                    </div>
+                    <!-- More drivers... -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/map.js"></script>
+    <script>
+        function handleBookRide() {
+            const selectedRide = document.querySelector('.ride-option.active');
+            const rideType = selectedRide ? selectedRide.dataset.type : 'swift';
+            const price = selectedRide ? selectedRide.dataset.price : '12.50';
+            
+            swiftRideMap.showNotification(`🚗 Booking ${rideType} ride for $${price}...`, 'success');
+            
+            setTimeout(() => {
+                swiftRideMap.showNotification(`✅ ${rideType} ride confirmed! Driver arriving in 2-3 minutes.`, 'success');
+            }, 2000);
+        }
+
+        // Add ride option selection
+        document.querySelectorAll('.ride-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.ride-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                const rideType = this.dataset.type;
+                const price = this.dataset.price;
+                document.querySelector('.book-ride-btn').innerHTML = 
+                    `<i class="fas fa-bolt"></i> Book ${rideType.charAt(0).toUpperCase() + rideType.slice(1)} Ride - $${price}`;
+            });
+        });
+    </script>
+</body>
+</html>
