@@ -1,0 +1,406 @@
+/* ===== DASHBOARD STYLES ===== */
+.dashboard-page {
+    background: #ffffff;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    padding-bottom: 80px; /* Space for bottom nav */
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    background: #ffffff;
+    border-bottom: 1px solid #f1f1f1;
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #0066FF;
+}
+
+.app-logo i {
+    font-size: 1.4rem;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.user-menu:hover {
+    background: #f8f9fa;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    background: #0066FF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.user-name {
+    font-weight: 500;
+    color: #374151;
+}
+
+/* Main Content */
+.dashboard-main {
+    padding: 24px 0;
+}
+
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Welcome Section */
+.welcome-section {
+    margin-bottom: 24px;
+}
+
+.welcome-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.welcome-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+/* Booking Card */
+.booking-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f3f4f6;
+    margin-bottom: 32px;
+}
+
+/* Location Inputs */
+.location-inputs {
+    margin-bottom: 24px;
+}
+
+.location-field {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+}
+
+.location-field:first-child {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.location-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 24px;
+}
+
+.marker-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #0066FF;
+}
+
+.marker-line {
+    width: 2px;
+    height: 24px;
+    background: #d1d5db;
+    margin-top: 4px;
+}
+
+.destination .marker-dot {
+    background: #0066FF;
+}
+
+.location-content {
+    flex: 1;
+}
+
+.location-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #6b7280;
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.location-input {
+    width: 100%;
+    border: none;
+    font-size: 1rem;
+    color: #111827;
+    background: none;
+    font-weight: 500;
+}
+
+.location-input:focus {
+    outline: none;
+}
+
+.location-input::placeholder {
+    color: #9ca3af;
+}
+
+/* Ride Options */
+.ride-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.ride-option {
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #ffffff;
+}
+
+.ride-option.active {
+    border-color: #0066FF;
+    background: #f8faff;
+}
+
+.ride-option:hover {
+    border-color: #0066FF;
+}
+
+.ride-icon {
+    font-size: 1.5rem;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.ride-option.active .ride-icon {
+    color: #0066FF;
+}
+
+.ride-name {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+}
+
+.ride-price {
+    font-weight: 700;
+    color: #111827;
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.ride-time {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Book Ride Button */
+.book-ride-btn.large {
+    width: 100%;
+    padding: 18px 24px;
+    background: #0066FF;
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.book-ride-btn.large:hover {
+    background: #0052CC;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.3);
+}
+
+/* Quick Actions */
+.quick-actions {
+    margin-bottom: 32px;
+}
+
+.section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 16px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+}
+
+.action-card {
+    background: #ffffff;
+    border: 1px solid #f3f4f6;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-card:hover {
+    border-color: #0066FF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    width: 40px;
+    height: 40px;
+    background: #f8faff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 8px;
+    color: #0066FF;
+    font-size: 1.1rem;
+}
+
+.action-text {
+    font-size: 0.8rem;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    transition: all 0.2s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.nav-item.active {
+    color: #0066FF;
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+}
+
+.nav-item:hover {
+    color: #0066FF;
+    background: #f8faff;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+    
+    .booking-card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+    
+    .ride-options-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .ride-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-align: left;
+        padding: 12px 16px;
+    }
+    
+    .ride-icon {
+        margin-bottom: 0;
+        font-size: 1.3rem;
+    }
+    
+    .ride-info {
+        flex: 1;
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .welcome-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* Loading States */
+.book-ride-btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.book-ride-btn.loading i {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
