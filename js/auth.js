@@ -7,6 +7,7 @@ class AuthManager {
     init() {
         this.setupPasswordToggle();
         this.setupFormValidation();
+        this.setupSignupForm();
         this.setupSocialLogin();
         console.log('🔐 Auth Manager initialized');
     }
@@ -64,6 +65,46 @@ class AuthManager {
         }
     }
 
+    // Sign Up specific functionality
+    setupSignupForm() {
+        const signupForm = document.getElementById('signupForm');
+        
+        if (signupForm) {
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleSignup();
+            });
+
+            // Password strength indicator
+            const passwordInput = document.getElementById('password');
+            if (passwordInput) {
+                passwordInput.addEventListener('input', () => {
+                    this.updatePasswordStrength(passwordInput.value);
+                });
+            }
+
+            // Confirm password validation
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            if (confirmPasswordInput) {
+                confirmPasswordInput.addEventListener('input', () => {
+                    this.validatePasswordMatch();
+                });
+            }
+
+            // Real-time validation for all inputs
+            const inputs = signupForm.querySelectorAll('.input-field');
+            inputs.forEach(input => {
+                input.addEventListener('blur', () => {
+                    this.validateSignupField(input);
+                });
+                
+                input.addEventListener('input', () => {
+                    this.clearError(input);
+                });
+            });
+        }
+    }
+
     validateField(field) {
         const value = field.value.trim();
         const container = field.parentElement;
@@ -89,9 +130,123 @@ class AuthManager {
         return true;
     }
 
+    updatePasswordStrength(password) {
+        const strengthBar = document.querySelector('.strength-fill');
+        const strengthText = document.querySelector('.strength-value');
+        
+        if (!strengthBar || !strengthText) return;
+
+        let strength = 0;
+        let feedback = 'Weak';
+
+        // Length check
+        if (password.length >= 8) strength++;
+        
+        // Lowercase check
+        if (/[a-z]/.test(password)) strength++;
+        
+        // Uppercase check
+        if (/[A-Z]/.test(password)) strength++;
+        
+        // Number check
+        if (/[0-9]/.test(password)) strength++;
+        
+        // Special character check
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+        // Cap strength at 4
+        strength = Math.min(strength, 4);
+
+        // Update UI
+        strengthBar.setAttribute('data-strength', strength - 1);
+        
+        switch(strength) {
+            case 1:
+                feedback = 'Weak';
+                strengthText.className = 'strength-value weak';
+                break;
+            case 2:
+                feedback = 'Medium';
+                strengthText.className = 'strength-value medium';
+                break;
+            case 3:
+                feedback = 'Strong';
+                strengthText.className = 'strength-value strong';
+                break;
+            case 4:
+                feedback = 'Very Strong';
+                strengthText.className = 'strength-value very-strong';
+                break;
+            default:
+                feedback = 'Weak';
+                strengthText.className = 'strength-value weak';
+        }
+
+        strengthText.textContent = feedback;
+    }
+
+    validatePasswordMatch() {
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        
+        if (!password || !confirmPassword) return;
+
+        if (confirmPassword.value && password.value !== confirmPassword.value) {
+            this.showFieldError(confirmPassword, 'Passwords do not match');
+        } else {
+            this.clearError(confirmPassword);
+            if (confirmPassword.value && password.value === confirmPassword.value) {
+                this.showFieldSuccess(confirmPassword);
+            }
+        }
+    }
+
+    validateSignupField(field) {
+        const value = field.value.trim();
+        
+        // Remove any existing error
+        this.clearError(field);
+        
+        if (!value) {
+            this.showFieldError(field, 'This field is required');
+            return false;
+        }
+        
+        switch(field.type) {
+            case 'email':
+                if (!this.isValidEmail(value)) {
+                    this.showFieldError(field, 'Please enter a valid email address');
+                    return false;
+                }
+                break;
+                
+            case 'tel':
+                if (!this.isValidPhone(value)) {
+                    this.showFieldError(field, 'Please enter a valid phone number');
+                    return false;
+                }
+                break;
+                
+            case 'password':
+                if (field.id === 'password' && value.length < 8) {
+                    this.showFieldError(field, 'Password must be at least 8 characters');
+                    return false;
+                }
+                break;
+        }
+        
+        this.showFieldSuccess(field);
+        return true;
+    }
+
     isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
+    }
+
+    isValidPhone(phone) {
+        const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+        return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
     }
 
     showError(field, message) {
@@ -111,9 +266,40 @@ class AuthManager {
         container.parentElement.appendChild(errorElement);
     }
 
+    showFieldError(field, message) {
+        const container = field.parentElement;
+        container.classList.add('error');
+        container.classList.remove('success');
+        
+        // Remove existing error message
+        const existingError = container.parentElement.querySelector('.error-message');
+        if (existingError) {
+            existingError.remove();
+        }
+        
+        // Add error message
+        const errorElement = document.createElement('span');
+        errorElement.className = 'error-message';
+        errorElement.textContent = message;
+        container.parentElement.appendChild(errorElement);
+    }
+
+    showFieldSuccess(field) {
+        const container = field.parentElement;
+        container.classList.add('success');
+        container.classList.remove('error');
+        
+        // Remove any error message
+        const errorMessage = container.parentElement.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.remove();
+        }
+    }
+
     clearError(field) {
         const container = field.parentElement;
         container.classList.remove('error');
+        container.classList.remove('success');
         
         const errorMessage = container.parentElement.querySelector('.error-message');
         if (errorMessage) {
@@ -173,6 +359,85 @@ class AuthManager {
                     reject(new Error('Invalid email or password. Try demo@swiftride.com / password'));
                 }
             }, 1000);
+        });
+    }
+
+    async handleSignup() {
+        const form = document.getElementById('signupForm');
+        const submitBtn = form.querySelector('.auth-submit-btn');
+        const formData = {
+            fullName: document.getElementById('fullName').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            password: document.getElementById('password').value,
+            confirmPassword: document.getElementById('confirmPassword').value,
+            acceptTerms: document.getElementById('acceptTerms').checked,
+            marketingConsent: document.getElementById('marketingConsent').checked
+        };
+
+        // Validate all fields
+        let isValid = true;
+        const inputs = form.querySelectorAll('.input-field');
+        inputs.forEach(input => {
+            if (!this.validateSignupField(input)) {
+                isValid = false;
+            }
+        });
+
+        // Special validation for password match
+        if (formData.password !== formData.confirmPassword) {
+            this.showFieldError(document.getElementById('confirmPassword'), 'Passwords do not match');
+            isValid = false;
+        }
+
+        // Validate terms acceptance
+        if (!formData.acceptTerms) {
+            this.showNotification('Please accept the Terms of Service and Privacy Policy', 'error');
+            isValid = false;
+        }
+
+        if (!isValid) {
+            this.showNotification('Please fix the errors above', 'error');
+            return;
+        }
+
+        // Show loading state
+        this.setLoadingState(submitBtn, true);
+
+        try {
+            // Simulate API call
+            await this.simulateSignup(formData);
+            
+            this.showNotification('🎉 Account created successfully! Redirecting...', 'success');
+            
+            // Simulate redirect to login
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+            
+        } catch (error) {
+            this.showNotification(error.message, 'error');
+            this.setLoadingState(submitBtn, false);
+        }
+    }
+
+    simulateSignup(userData) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // Demo validation - in real app, this would be API call
+                if (userData.email && userData.password.length >= 8) {
+                    resolve({ 
+                        success: true, 
+                        user: { 
+                            name: userData.fullName, 
+                            email: userData.email,
+                            phone: userData.phone
+                        } 
+                    });
+                } else {
+                    reject(new Error('Please check your information and try again'));
+                }
+            }, 1500);
         });
     }
 
