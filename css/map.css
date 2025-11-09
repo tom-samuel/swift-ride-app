@@ -1,0 +1,149 @@
+/* Map Container Styles */
+.map-container {
+    height: 500px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+#rideMap {
+    height: 100%;
+    width: 100%;
+}
+
+/* Custom SwiftRide Map Markers */
+.swiftride-marker {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-xl);
+}
+
+.user-marker {
+    width: 20px;
+    height: 20px;
+    animation: pulse 2s infinite;
+}
+
+.driver-marker {
+    width: 16px;
+    height: 16px;
+    background: var(--accent);
+}
+
+.pickup-marker, .destination-marker {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+}
+
+.pickup-marker {
+    background: var(--success);
+}
+
+.destination-marker {
+    background: var(--primary);
+}
+
+/* Map Controls */
+.map-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.location-btn {
+    background: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: var(--shadow-md);
+    cursor: pointer;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.location-btn:hover {
+    background: var(--gray-100);
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes drive {
+    0% { transform: translateX(0) translateY(0); }
+    25% { transform: translateX(5px) translateY(-2px); }
+    50% { transform: translateX(10px) translateY(0); }
+    75% { transform: translateX(5px) translateY(2px); }
+    100% { transform: translateX(0) translateY(0); }
+}
+
+.driver-moving {
+    animation: drive 3s ease-in-out infinite;
+}
+
+/* Map Popup Styling */
+.leaflet-popup-content {
+    font-family: 'Inter', sans-serif;
+    border-radius: 12px;
+}
+
+.swiftride-popup {
+    padding: 10px;
+    min-width: 200px;
+}
+
+.driver-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.driver-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.driver-details {
+    flex: 1;
+}
+
+.driver-name {
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-bottom: 4px;
+}
+
+.driver-rating {
+    color: var(--warning);
+    font-size: 0.9rem;
+}
+
+.driver-car {
+    color: var(--gray-600);
+    font-size: 0.8rem;
+    margin-top: 2px;
+}
