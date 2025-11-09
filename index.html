@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SwiftRide - Premium Ride-Hailing Experience</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Enhanced Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <div class="logo-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
@@ -25,7 +27,7 @@
                     <a href="#features" class="nav-link">Features</a>
                     <a href="#how-it-works" class="nav-link">How It Works</a>
                     <a href="#safety" class="nav-link">Safety</a>
-                    <a href="#drive" class="nav-link">Drive With Us</a>
+                    <a href="driver-login.html" class="nav-link">Drive With Us</a>
                 </div>
                 
                 <!-- SINGLE SET OF BUTTONS - No duplicates -->
@@ -82,14 +84,30 @@
                 </p>
                 
                 <div class="hero-actions">
-                    <a href="signup.html" class="btn-hero-primary">
-                        <i class="fas fa-download"></i>
-                        Download App
+                    <a href="passenger-dashboard.html" class="btn-hero-primary">
+                        <i class="fas fa-car"></i>
+                        Book a Ride
                     </a>
-                    <button class="btn-hero-secondary">
-                        <i class="fas fa-play-circle"></i>
-                        Watch Demo
-                    </button>
+                    <a href="driver-login.html" class="btn-hero-secondary">
+                        <i class="fas fa-id-card"></i>
+                        Drive With Us
+                    </a>
+                </div>
+
+                <!-- App Access Buttons -->
+                <div class="app-access-buttons">
+                    <a href="passenger-dashboard.html" class="btn-passenger">
+                        <i class="fas fa-user"></i>
+                        Passenger App
+                    </a>
+                    <a href="driver-login.html" class="btn-driver">
+                        <i class="fas fa-car"></i>
+                        Driver App
+                    </a>
+                    <a href="admin-login.html" class="btn-admin">
+                        <i class="fas fa-cog"></i>
+                        Admin Panel
+                    </a>
                 </div>
                 
                 <div class="hero-features">
@@ -205,6 +223,7 @@
         </div>
     </section>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
