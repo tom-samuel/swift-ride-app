@@ -294,6 +294,50 @@ body {
   transform: translateY(-2px);
 }
 
+/* App Access Buttons */
+.app-access-buttons {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.btn-passenger, .btn-driver, .btn-admin {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 140px;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.btn-passenger {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-driver {
+  background: var(--secondary);
+  color: white;
+}
+
+.btn-admin {
+  background: var(--gray-600);
+  color: white;
+}
+
+.btn-passenger:hover, .btn-driver:hover, .btn-admin:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 /* ===== HERO SECTION ===== */
 .hero-section {
   min-height: 100vh;
@@ -417,7 +461,7 @@ body {
 .hero-actions {
   display: flex;
   gap: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   flex-wrap: wrap;
 }
 
@@ -795,6 +839,46 @@ body {
   animation: bounce-in 0.6s ease;
 }
 
+/* ===== DASHBOARD LAYOUT ===== */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+  align-items: start;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 100px auto 0;
+}
+
+.dashboard-sidebar {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.dashboard-main {
+  min-height: 80vh;
+}
+
+.map-section {
+  margin: 2rem 0;
+}
+
+.map-container {
+  height: 500px;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+#rideMap {
+  height: 100%;
+  width: 100%;
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1024px) {
   .hero-title {
@@ -803,6 +887,11 @@ body {
   
   .hero-container {
     gap: 3rem;
+  }
+  
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
 
@@ -838,6 +927,14 @@ body {
     flex-wrap: wrap;
   }
   
+  .app-access-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-passenger, .btn-driver, .btn-admin {
+    width: 100%;
+  }
+  
   .hero-features {
     justify-content: center;
     gap: 1.5rem;
@@ -869,6 +966,15 @@ body {
   .store-btn {
     width: 100%;
     max-width: 250px;
+  }
+  
+  .dashboard-container {
+    padding: 1rem;
+    margin-top: 80px;
+  }
+  
+  .map-container {
+    height: 400px;
   }
 }
 
@@ -913,5 +1019,9 @@ body {
   
   .cta-content p {
     font-size: 1rem;
+  }
+  
+  .map-container {
+    height: 350px;
   }
 }
