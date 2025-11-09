@@ -128,7 +128,7 @@ class SwiftRideApp {
                 <a href="#" class="mobile-nav-link">Drive With Us</a>
             </div>
             <div class="mobile-nav-actions">
-                <a href="login.html" class="btn-secondary">Sign In</a>
+                <a href="login.html" class="btn-secondary">Login</a>
                 <a href="signup.html" class="btn-primary">Get Started</a>
             </div>
         `;
