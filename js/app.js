@@ -9,7 +9,6 @@ class SwiftRideApp {
         this.setupAnimations();
         this.setupEventListeners();
         this.setupMobileMenu();
-        this.setupSmoothScrolling();
         console.log('🚗 SwiftRide Premium initialized');
     }
 
@@ -25,15 +24,18 @@ class SwiftRideApp {
     }
 
     setupAnimations() {
-        // Add hover animations to interactive elements
         const interactiveElements = document.querySelectorAll('.btn-primary, .btn-secondary, .ride-option');
         interactiveElements.forEach(el => {
             el.classList.add('hover-lift');
         });
+
+        const buttons = document.querySelectorAll('.btn-primary, .btn-hero-primary, .book-ride-btn');
+        buttons.forEach(button => {
+            button.classList.add('ripple');
+        });
     }
 
     setupEventListeners() {
-        // Download buttons
         const downloadButtons = document.querySelectorAll('.store-btn, .btn-hero-primary');
         downloadButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -42,7 +44,6 @@ class SwiftRideApp {
             });
         });
 
-        // Demo button
         const demoBtn = document.querySelector('.btn-hero-secondary');
         if (demoBtn) {
             demoBtn.addEventListener('click', (e) => {
@@ -51,7 +52,6 @@ class SwiftRideApp {
             });
         }
 
-        // Ride options
         const rideOptions = document.querySelectorAll('.ride-option');
         rideOptions.forEach(option => {
             option.addEventListener('click', () => {
@@ -63,42 +63,19 @@ class SwiftRideApp {
             });
         });
 
-        // Book ride button
         const bookBtn = document.querySelector('.book-ride-btn');
         if (bookBtn) {
             bookBtn.addEventListener('click', () => {
                 this.bookRide();
             });
         }
-
-        // App access buttons
-        const appButtons = document.querySelectorAll('.btn-passenger, .btn-driver, .btn-admin');
-        appButtons.forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.preventDefault();
-                const appType = button.classList.contains('btn-passenger') ? 'Passenger' : 
-                               button.classList.contains('btn-driver') ? 'Driver' : 'Admin';
-                this.showNotification(`🚀 Opening ${appType} App...`, 'success');
-                // In real app, this would navigate to the respective dashboard
-                setTimeout(() => {
-                    if (appType === 'Passenger') {
-                        window.location.href = 'passenger-dashboard.html';
-                    } else if (appType === 'Driver') {
-                        window.location.href = 'driver-login.html';
-                    } else {
-                        window.location.href = 'admin-login.html';
-                    }
-                }, 1000);
-            });
-        });
     }
 
-    // Enhanced Mobile Menu Functionality
     setupMobileMenu() {
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navbar = document.querySelector('.navbar');
         
         if (mobileMenuBtn) {
-            // Create mobile menu if it doesn't exist
             if (!document.querySelector('.mobile-menu')) {
                 this.createMobileMenu();
             }
@@ -107,21 +84,30 @@ class SwiftRideApp {
             
             mobileMenuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                this.toggleMobileMenu();
+                mobileMenu.classList.toggle('active');
+                mobileMenuBtn.classList.toggle('active');
+                
+                const icon = mobileMenuBtn.querySelector('i');
+                if (mobileMenu.classList.contains('active')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
+                }
             });
             
-            // Close menu when clicking outside
             document.addEventListener('click', (e) => {
-                if (!e.target.closest('.navbar') && mobileMenu.classList.contains('active')) {
-                    this.closeMobileMenu();
+                if (!navbar.contains(e.target) && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
                 }
             });
             
-            // Close menu on escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                    this.closeMobileMenu();
-                }
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+                });
             });
         }
     }
@@ -131,78 +117,17 @@ class SwiftRideApp {
         mobileMenu.className = 'mobile-menu';
         mobileMenu.innerHTML = `
             <div class="mobile-nav-links">
-                <a href="#features" class="mobile-nav-link">
-                    <i class="fas fa-star"></i>
-                    Features
-                </a>
-                <a href="#how-it-works" class="mobile-nav-link">
-                    <i class="fas fa-play-circle"></i>
-                    How It Works
-                </a>
-                <a href="#safety" class="mobile-nav-link">
-                    <i class="fas fa-shield-alt"></i>
-                    Safety
-                </a>
-                <a href="driver-login.html" class="mobile-nav-link">
-                    <i class="fas fa-car"></i>
-                    Drive With Us
-                </a>
+                <a href="#features" class="mobile-nav-link">Features</a>
+                <a href="#how-it-works" class="mobile-nav-link">How It Works</a>
+                <a href="#safety" class="mobile-nav-link">Safety</a>
+                <a href="#" class="mobile-nav-link">Drive With Us</a>
             </div>
             <div class="mobile-nav-actions">
                 <a href="login.html" class="btn-secondary">Login</a>
-                <a href="signup.html" class="btn-primary">Sign Up</a>
+                <a href="signup.html" class="btn-primary">Get Started</a>
             </div>
         `;
         document.body.appendChild(mobileMenu);
-        
-        // Add click listeners to mobile menu links
-        const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                this.closeMobileMenu();
-            });
-        });
-    }
-    
-    toggleMobileMenu() {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const icon = mobileMenuBtn.querySelector('i');
-        
-        mobileMenu.classList.toggle('active');
-        
-        if (mobileMenu.classList.contains('active')) {
-            icon.className = 'fas fa-times';
-            document.body.style.overflow = 'hidden';
-        } else {
-            icon.className = 'fas fa-bars';
-            document.body.style.overflow = '';
-        }
-    }
-    
-    closeMobileMenu() {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const icon = mobileMenuBtn.querySelector('i');
-        
-        mobileMenu.classList.remove('active');
-        icon.className = 'fas fa-bars';
-        document.body.style.overflow = '';
-    }
-
-    setupSmoothScrolling() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
     }
 
     showDownloadModal() {
@@ -225,24 +150,15 @@ class SwiftRideApp {
     }
 
     showNotification(message, type = 'info') {
-        // Remove existing notifications
-        const existingNotifications = document.querySelectorAll('.notification');
-        existingNotifications.forEach(notification => notification.remove());
-        
         const notification = document.createElement('div');
         notification.className = `notification notification-${type} bounce-in`;
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
-                ${message}
-            </div>
-        `;
+        notification.innerHTML = `<div class="notification-content">${message}</div>`;
         
         notification.style.cssText = `
             position: fixed;
             top: 100px;
             right: 20px;
-            background: ${type === 'success' ? '#00C851' : type === 'error' ? '#FF4444' : '#0066FF'};
+            background: ${type === 'success' ? '#00C851' : '#0066FF'};
             color: white;
             padding: 16px 24px;
             border-radius: 12px;
@@ -250,10 +166,6 @@ class SwiftRideApp {
             z-index: 10000;
             max-width: 300px;
             font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: fadeInUp 0.3s ease;
         `;
 
         document.body.appendChild(notification);
@@ -265,10 +177,19 @@ class SwiftRideApp {
     }
 }
 
-// Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new SwiftRideApp();
 });
 
-// Make app globally accessible
-window.swiftRideApp = new SwiftRideApp();
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
