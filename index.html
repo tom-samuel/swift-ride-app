@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SwiftRide Nigeria - Premium Ride-Hailing Experience</title>
+    <title>SwiftRide - Premium Ride-Hailing Experience</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/premium.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
     <!-- Animated Background -->
@@ -29,7 +28,6 @@
                     <i class="fas fa-bolt"></i>
                 </div>
                 <span class="logo-text">SwiftRide</span>
-                <span class="country-badge">NG</span>
             </a>
             
             <div class="nav-content">
@@ -62,66 +60,73 @@
                 </div>
                 
                 <h1 class="hero-title">
-                    <span class="title-line">Moving Nigeria</span>
-                    <span class="title-line gradient-text">Forward</span>
+                    <span class="title-line">Redefining Urban</span>
+                    <span class="title-line gradient-text">Transportation</span>
                 </h1>
                 
                 <p class="hero-subtitle">
-                    Experience luxury rides across major cities. Premium vehicles, 
-                    professional drivers, and cutting-edge technology for seamless urban mobility.
+                    AI-powered ride-hailing platform with premium vehicles, professional drivers, 
+                    and enterprise-grade security for modern cities.
                 </p>
                 
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">2M+</div>
-                        <div class="stat-label">Rides in Nigeria</div>
+                        <div class="stat-number">15M+</div>
+                        <div class="stat-label">Rides Completed</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">4.8★</div>
+                        <div class="stat-number">4.9★</div>
                         <div class="stat-label">Customer Rating</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">12</div>
-                        <div class="stat-label">Nigerian Cities</div>
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Cities Worldwide</div>
                     </div>
-                </div>
-
-                <div class="hero-actions">
-                    <a href="signup.html" class="btn-hero-primary">
-                        <span>Start Riding</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#cities" class="btn-hero-secondary">
-                        <i class="fas fa-map-marker-alt"></i>
-                        View Cities
-                    </a>
                 </div>
             </div>
             
             <div class="hero-visual">
-                <div class="nigeria-map-container">
-                    <div id="nigeriaMap"></div>
-                    <div class="map-overlay">
-                        <div class="active-cities">
-                            <div class="city-marker lagos" data-city="Lagos">
-                                <div class="pulse-dot"></div>
-                                <div class="city-name">Lagos</div>
-                            </div>
-                            <div class="city-marker abuja" data-city="Abuja">
-                                <div class="pulse-dot"></div>
-                                <div class="city-name">Abuja</div>
-                            </div>
-                            <div class="city-marker p-harcourt" data-city="Port Harcourt">
-                                <div class="pulse-dot"></div>
-                                <div class="city-name">Port Harcourt</div>
-                            </div>
-                            <div class="city-marker ibadan" data-city="Ibadan">
-                                <div class="pulse-dot"></div>
-                                <div class="city-name">Ibadan</div>
-                            </div>
-                            <div class="city-marker kano" data-city="Kano">
-                                <div class="pulse-dot"></div>
-                                <div class="city-name">Kano</div>
+                <div class="app-showcase">
+                    <div class="phone-mockup premium">
+                        <div class="phone-screen">
+                            <div class="app-demo">
+                                <div class="demo-header">
+                                    <div class="demo-location">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Times Square, NYC</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="demo-map">
+                                    <div class="demo-car-moving">
+                                        <i class="fas fa-car"></i>
+                                    </div>
+                                    <div class="demo-user-location">
+                                        <div class="user-pulse"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="demo-ride-options">
+                                    <div class="demo-option active">
+                                        <i class="fas fa-bolt"></i>
+                                        <div class="option-info">
+                                            <div class="option-name">SWIFT</div>
+                                            <div class="option-price">$12.50</div>
+                                        </div>
+                                    </div>
+                                    <div class="demo-option">
+                                        <i class="fas fa-car-side"></i>
+                                        <div class="option-info">
+                                            <div class="option-name">COMFORT</div>
+                                            <div class="option-price">$18.75</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="demo-book-btn">
+                                    <i class="fas fa-bolt"></i>
+                                    <span>BOOK PREMIUM RIDE</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -130,56 +135,8 @@
         </div>
 
         <div class="scroll-indicator">
-            <div class="scroll-text">Explore Nigerian Cities</div>
+            <div class="scroll-text">Explore Features</div>
             <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- Nigerian Cities Section -->
-    <section id="cities" class="cities-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Available Across Nigeria</h2>
-                <p>SwiftRide operates in major cities nationwide with premium service</p>
-            </div>
-            
-            <div class="cities-grid">
-                <div class="city-card">
-                    <div class="city-image lagos-bg"></div>
-                    <div class="city-content">
-                        <h3>Lagos</h3>
-                        <p>Commercial capital with 24/7 premium service</p>
-                        <div class="city-stats">
-                            <span><i class="fas fa-car"></i> 15,000+ rides daily</span>
-                            <span><i class="fas fa-star"></i> 4.7★ rating</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="city-card">
-                    <div class="city-image abuja-bg"></div>
-                    <div class="city-content">
-                        <h3>Abuja</h3>
-                        <p>Capital city with executive class vehicles</p>
-                        <div class="city-stats">
-                            <span><i class="fas fa-car"></i> 8,000+ rides daily</span>
-                            <span><i class="fas fa-star"></i> 4.8★ rating</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="city-card">
-                    <div class="city-image portharcourt-bg"></div>
-                    <div class="city-content">
-                        <h3>Port Harcourt</h3>
-                        <p>Oil city with premium comfort rides</p>
-                        <div class="city-stats">
-                            <span><i class="fas fa-car"></i> 5,000+ rides daily</span>
-                            <span><i class="fas fa-star"></i> 4.6★ rating</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -187,8 +144,8 @@
     <section id="features" class="features-section">
         <div class="container">
             <div class="section-header">
-                <h2>Why Choose SwiftRide Nigeria?</h2>
-                <p>Premium features designed for Nigerian roads and lifestyle</p>
+                <h2>Why Choose SwiftRide?</h2>
+                <p>Premium features designed for modern urban mobility</p>
             </div>
             
             <div class="features-grid">
@@ -197,7 +154,7 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>Enhanced Safety</h3>
-                    <p>24/7 ride monitoring, emergency response, and verified drivers across all Nigerian cities</p>
+                    <p>24/7 ride monitoring, emergency response, and verified drivers with comprehensive background checks</p>
                 </div>
                 
                 <div class="feature-card">
@@ -205,7 +162,7 @@
                         <i class="fas fa-bolt"></i>
                     </div>
                     <h3>Instant Booking</h3>
-                    <p>Get matched with premium drivers in under 2 minutes in Lagos, Abuja, and other major cities</p>
+                    <p>Get matched with premium drivers in under 2 minutes with our advanced AI matching system</p>
                 </div>
                 
                 <div class="feature-card">
@@ -213,7 +170,7 @@
                         <i class="fas fa-car-side"></i>
                     </div>
                     <h3>Premium Vehicles</h3>
-                    <p>Well-maintained, air-conditioned vehicles perfect for Nigerian climate and road conditions</p>
+                    <p>Luxury vehicles maintained to the highest standards with professional, experienced drivers</p>
                 </div>
                 
                 <div class="feature-card">
@@ -221,7 +178,43 @@
                         <i class="fas fa-wallet"></i>
                     </div>
                     <h3>Flexible Payment</h3>
-                    <p>Cash, card, and mobile money options tailored for Nigerian users</p>
+                    <p>Multiple payment options including credit cards, digital wallets, and corporate accounts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safety Section -->
+    <section id="safety" class="safety-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Your Safety is Our Priority</h2>
+                <p>Comprehensive safety features for peace of mind</p>
+            </div>
+            
+            <div class="safety-features">
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h4>Verified Drivers</h4>
+                    <p>All drivers undergo rigorous background checks and training</p>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4>Live Tracking</h4>
+                    <p>Real-time ride tracking with shareable trip details</p>
+                </div>
+                
+                <div class="safety-item">
+                    <div class="safety-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h4>24/7 Support</h4>
+                    <p>Round-the-clock customer support and emergency assistance</p>
                 </div>
             </div>
         </div>
@@ -231,23 +224,20 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2>Ready to Ride Better in Nigeria?</h2>
-                <p>Join thousands of Nigerians enjoying premium ride-hailing experience</p>
+                <h2>Ready to Experience Premium Rides?</h2>
+                <p>Join thousands of users enjoying the SwiftRide experience</p>
                 <div class="cta-buttons">
                     <a href="signup.html" class="btn-cta-primary">
-                        <i class="fas fa-download"></i>
-                        Download App
+                        Get Started Now
                     </a>
-                    <a href="signup.html" class="btn-cta-secondary">
-                        Sign Up Now
+                    <a href="login.html" class="btn-cta-secondary">
+                        I Have an Account
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/nigeria-map.js"></script>
 </body>
-</html>
+                    </html>
